@@ -14,13 +14,12 @@ animations = [ {
 radius = 20.0
 height = 100.0
 
-[node name="Dog" type="AnimatedSprite"]
+[node name="Dog" type="KinematicBody2D"]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
 self_modulate = Color( 1, 0.494118, 0, 1 )
-position = Vector2( 132.5, 104 )
 frames = SubResource( 1 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 2 )
