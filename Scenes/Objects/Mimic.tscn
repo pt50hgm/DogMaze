@@ -11,14 +11,14 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 20.0
-height = 50.0
+height = 25.0
 
 [node name="Mimic" type="KinematicBody2D"]
 position = Vector2( 700, 0 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 self_modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
