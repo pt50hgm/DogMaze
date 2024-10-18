@@ -7,16 +7,17 @@ extends NavigationPolygonInstance
 # var b = "text"
 
 func set_nav_poly():
+	var margin = 40.0
 	var polygon = NavigationPolygon.new()
 	var size = 1000.0
 	var vertices = [
 		Vector2(-size, -size), Vector2(size, -size),
 		Vector2(size, size), Vector2(-size, size)]
 	polygon.add_outline(PoolVector2Array(vertices))
-	var obstacleList = get_children()
+	var obstacleList = $"Obstacle Manager".get_children()
 	for obstacle in obstacleList:
 		vertices = []
-		for pos in obstacle.get_corner_pos():
+		for pos in obstacle.get_corner_pos(margin):
 			vertices.push_back(pos)
 		polygon.add_outline(PoolVector2Array(vertices))
 	polygon.make_polygons_from_outlines()
