@@ -5,14 +5,13 @@ export var moveSpeed : float = 5000.0
 var velocity : Vector2 = Vector2.ZERO
 onready var Main = get_parent()
 onready var Player = get_node("/root/ViewportContainer/Viewport/Main/Player")
-var follow_player = false
-export var follow_duration: float
-var follow_timer
-onready var player_light = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
+export var followDuration: float
+onready var playerLight = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
 
-export var follow_duration : float
-var follow_timer : float
-var follow_player = false
+var followTimer : float
+var followPlayer = false
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,13 +20,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if Input.is_action_pressed("call_dog"):
-		follow_player = true
-		follow_timer = follow_duration
+		followPlayer = true
+		followTimer = followDuration
 	
-	if follow_player:
-		follow_timer -= delta
-		if follow_timer <= 0:
-			follow_player = false
+	if followPlayer:
+		followTimer -= delta
+		if followTimer <= 0:
+			followPlayer = false
 			
 		set_target_location(Player.get_position()) # get player position
 	
@@ -41,32 +40,32 @@ func _physics_process(delta):
 	move_and_slide(velocity)
 	
 	if Input.is_action_pressed("turbo_charge"):
-		if is_illuminated(player_light):
+		if is_illuminated(playerLight):
 			print("i'm illuminated!")
 			pass
 		else:
 			print("sadge")
 
 func is_illuminated(light: Light2D) -> bool:
-	var dog_position = self.position
+	var dogPosition = self.position
 
-	var light_position = light.global_position
-	var player_rotation = Player.rotation
+	var lightPosition = light.global_position
+	var playerRotation = Player.rotation
 	
-	var angle_to_dog = light_position.angle_to_point(dog_position)
-	if angle_to_dog > 0:
-		angle_to_dog -= PI
-	else: angle_to_dog += PI
+	var angleToDog = lightPosition.angle_to_point(dogPosition)
+	if angleToDog > 0:
+		angleToDog -= PI
+	else: angleToDog += PI
 	
-	print("player rotation: ", rad2deg(player_rotation))
-	print("angle_to_dog:", rad2deg(angle_to_dog))
+	print("player rotation: ", rad2deg(playerRotation))
+	print("angle_to_dog:", rad2deg(angleToDog))
 	
-	return (abs(angle_to_dog - player_rotation) < PI/4/2) or \
-	(abs(angle_to_dog + 2*PI - player_rotation) < PI/4/2) or \
-	(abs(angle_to_dog - player_rotation + 2*PI) < PI/4/2)
+	return (abs(angleToDog - playerRotation) < PI/4/2) or \
+	(abs(angleToDog + 2*PI - playerRotation) < PI/4/2) or \
+	(abs(angleToDog - playerRotation + 2*PI) < PI/4/2)
 	
-	print("\n\ndog: ", dog_position)
-	print("light_position: ", light_position)
+	print("\n\ndog: ", dogPosition)
+	print("light_position: ", lightPosition)
 	return true
 
 	# Calculate the light's effective radius (length of the cone)
