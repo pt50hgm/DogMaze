@@ -19,4 +19,5 @@ func get_input() -> void:
 func _physics_process(delta):
 	get_input()
 	move_and_slide(velocity)
-	get_global_mouse_position()
+	
+	look_at(get_global_mouse_position())
