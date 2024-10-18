@@ -7,7 +7,7 @@ extends NavigationPolygonInstance
 # var b = "text"
 
 func set_nav_poly():
-	var margin = 40.0
+	var margin = -1.0
 	var polygon = NavigationPolygon.new()
 	var size = 1000.0
 	var vertices = [

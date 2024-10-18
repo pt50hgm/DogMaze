@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WideFlashlight.png-f76d8ceabd1a954ddf0a37bc1c4356b8.stex"
+path="res://.import/Flashlight.png-c91ece55633d8243bca64602adbaabf0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Placeholders/WideFlashlight.png"
-dest_files=[ "res://.import/WideFlashlight.png-f76d8ceabd1a954ddf0a37bc1c4356b8.stex" ]
+source_file="res://Sprites/Player/Flashlight.png"
+dest_files=[ "res://.import/Flashlight.png-c91ece55633d8243bca64602adbaabf0.stex" ]
 
 [params]
 
