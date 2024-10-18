@@ -54,6 +54,7 @@ height = 50.0
 
 [node name="Dog" parent="." instance=ExtResource( 3 )]
 position = Vector2( 100, 100 )
+follow_duration = 5.0
 
 [node name="Mimic Manager" type="YSort" parent="."]
 
