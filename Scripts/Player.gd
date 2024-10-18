@@ -2,8 +2,13 @@ extends KinematicBody2D
 
 export var speed : float
 var velocity : Vector2 = Vector2.ZERO
+
+export var default_light_energy : float
+export var turbo_light_energy : float
+
 onready var camera : Camera2D = $Camera2D
 #onready var viewport : Viewport = get_node("/root/ViewportContainer/Viewport")
+
 
 func get_input() -> void:
 	# Detect up/down/left/right keystate and only move when pressed
@@ -30,6 +35,12 @@ func _input(event):
 		event = make_input_local(event)
 		$Graphics.look_at(event.position + position)
 
+
+func _process(delta):
+	if Input.is_action_pressed("turbo_charge"):
+		$Light2D.energy = turbo_light_energy
+	else:
+		$Light2D.energy = default_light_energy
 
 func get_position() -> Vector2:
 	return position

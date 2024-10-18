@@ -10,6 +10,10 @@ export var follow_duration: float
 var follow_timer
 onready var player_light = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
 
+export var follow_duration : float
+var follow_timer : float
+var follow_player = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -31,46 +35,59 @@ func _physics_process(delta):
 	if arrived_at_target():
 		#Set animation to idle
 		velocity = Vector2.ZERO
-		pass
 	else:
 		velocity = moveDirection * moveSpeed * delta
 		navigationAgent.set_velocity(velocity)
 	move_and_slide(velocity)
 	
-#	if is_illuminated(player_light):
-#		print("i'm illuminated!")
-#	else:
-#		print("sadge")
-#
-#
-#func is_illuminated(light: Light2D) -> bool:
-#	# Get the global position of the dog
-#	var dog_position = global_position
-#
-#	# Check if the light has a valid texture
-#	if light.texture == null:
-#		return false
-#
-#	# Get the global position and rotation of the light
-#	var light_position = light.global_position
-#	var light_rotation = Player.rotation
-#
-#	# Calculate the light's effective radius (length of the cone)
+	if Input.is_action_pressed("turbo_charge"):
+		if is_illuminated(player_light):
+			print("i'm illuminated!")
+			pass
+		else:
+			print("sadge")
+
+func is_illuminated(light: Light2D) -> bool:
+	var dog_position = self.position
+
+	var light_position = light.global_position
+	var player_rotation = Player.rotation
+	
+	var angle_to_dog = light_position.angle_to_point(dog_position)
+	if angle_to_dog > 0:
+		angle_to_dog -= PI
+	else: angle_to_dog += PI
+	
+	print("player rotation: ", rad2deg(player_rotation))
+	print("angle_to_dog:", rad2deg(angle_to_dog))
+	
+	return (abs(angle_to_dog - player_rotation) < PI/4/2) or \
+	(abs(angle_to_dog + 2*PI - player_rotation) < PI/4/2) or \
+	(abs(angle_to_dog - player_rotation + 2*PI) < PI/4/2)
+	
+	print("\n\ndog: ", dog_position)
+	print("light_position: ", light_position)
+	return true
+
+	# Calculate the light's effective radius (length of the cone)
 #	var light_radius = light.texture.get_size().x * light.scale.x
 #
-#	# Define the width of the cone (adjust based on your requirements)
-#	var cone_width = light.texture.get_size().y * light.scale.y
+#	# Define the spread angle of the cone (in radians)
+#	var spread_angle = deg2rad(45) # Example spread of 45 degrees (adjust as needed)
 #
-#	# Create a rectangle representing the cone's area
-#	var half_width = cone_width / 2
-#	var rect_center = light_position + Vector2(light_radius / 2, 0).rotated(light_rotation)
-#	var light_rect = Rect2(rect_center - Vector2(light_radius / 2, half_width), Vector2(light_radius, cone_width))
+#	# Calculate the two base points of the triangle
+#	var direction = Vector2(1, 0).rotated(light_rotation).normalized() * light_radius
+#	var left_point = light_position + direction.rotated(-spread_angle / 2)
+#	var right_point = light_position + direction.rotated(spread_angle / 2)
 #
-#	# Rotate the rectangle based on the light's rotation
-#	var rotated_position = dog_position - light_position
-#	rotated_position = rotated_position.rotated(-light_rotation)
-#	var rotated_rect = Rect2(light_rect.position - light_position, light_rect.size)
-#
-#	# Check if the dog's position (rotated into light's local space) is within the rotated rectangle
-#	return rotated_rect.has_point(rotated_position)
+#	# Check if the dog's position is inside the triangle
+#	return point_in_triangle(dog_position, light_position, left_point, right_point) and detect_collision():
 
+	# Function to check if a point is inside a triangle
+#func point_in_triangle(p: Vector2, a: Vector2, b: Vector2, c: Vector2) -> bool:
+#	var d1 = (p.x - b.x) * (a.y - b.y) - (a.x - b.x) * (p.y - b.y)
+#	var d2 = (p.x - c.x) * (b.y - c.y) - (b.x - c.x) * (p.y - c.y)
+#	var d3 = (p.x - a.x) * (c.y - a.y) - (c.x - a.x) * (p.y - a.y)
+#	var has_neg = (d1 < 0) or (d2 < 0) or (d3 < 0)
+#	var has_pos = (d1 > 0) or (d2 > 0) or (d3 > 0)
+#	return not (has_neg and has_pos)
