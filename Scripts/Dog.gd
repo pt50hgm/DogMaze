@@ -4,8 +4,11 @@ export var moveSpeed : float = 5000.0
 
 var velocity : Vector2 = Vector2.ZERO
 onready var Main = get_parent()
-onready var Player = get_node("/root/Main/Player")
-onready var player_light = get_node("/root/Main/Player/Light2D")
+onready var Player = get_node("/root/ViewportContainer/Viewport/Main/Player")
+var follow_player = false
+export var follow_duration: float
+var follow_timer
+onready var player_light = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
 
 export var follow_duration : float
 var follow_timer : float
