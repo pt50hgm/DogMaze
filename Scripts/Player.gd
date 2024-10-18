@@ -21,3 +21,6 @@ func _physics_process(delta):
 	move_and_slide(velocity)
 	
 	look_at(get_global_mouse_position())
+
+func get_position() -> Vector2:
+	return position
