@@ -49,7 +49,6 @@ width = 300.0
 height = 50.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-script = ExtResource( 7 )
 
 [node name="Dog" parent="." instance=ExtResource( 3 )]
 position = Vector2( 100, 100 )

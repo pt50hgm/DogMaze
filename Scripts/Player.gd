@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-var speed = 300
-var velocity = Vector2()
+var speed : float = 300.0
+var velocity : Vector2 = Vector2.ZERO
 
-func get_input():
+func get_input() -> void:
 	# Detect up/down/left/right keystate and only move when pressed
 	velocity = Vector2()
 	if Input.is_action_pressed('right'):
