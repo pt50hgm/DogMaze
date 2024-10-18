@@ -21,7 +21,8 @@ func on_velocity_computed(velocity) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	navigationAgent.connect("velocity_computed", self, "_on_velocity_computed")
+	pass
+#	navigationAgent.connect("velocity_computed", self, "_on_velocity_computed")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
