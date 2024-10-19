@@ -24,9 +24,9 @@ func get_input() -> void:
 		velocity.y -= 1
 	velocity = velocity.normalized() * speed
 	
-	if graphics.rotation < 0:
+	if graphics.rotation < -PI:
 		graphics.rotation += 2*PI
-	elif graphics.rotation > 2*PI:
+	elif graphics.rotation > PI:
 		graphics.rotation -= 2*PI 
 
 func _physics_process(delta):
