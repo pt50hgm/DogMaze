@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Objects/Mimic.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/TextureRect.gd" type="Script" id=7]
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=163]
 code = "shader_type canvas_item;
 
 uniform int amount = 240;
@@ -20,11 +20,11 @@ void fragment()
 	COLOR = text;
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
-shader_param/amount = 120
+[sub_resource type="ShaderMaterial" id=161]
+shader = SubResource( 163 )
+shader_param/amount = 240
 
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="ViewportTexture" id=162]
 
 [node name="ViewportContainer" type="ViewportContainer"]
 margin_right = 1920.0
@@ -37,27 +37,33 @@ render_target_update_mode = 3
 
 [node name="Main" type="Node2D" parent="Viewport"]
 
-[node name="TestMaze" parent="Viewport/Main" instance=ExtResource( 1 )]
+[node name="Navigation2D" type="Navigation2D" parent="Viewport/Main"]
 
-[node name="Dog" parent="Viewport/Main" instance=ExtResource( 3 )]
+[node name="Maze" parent="Viewport/Main/Navigation2D" instance=ExtResource( 1 )]
+
+[node name="Dog" parent="Viewport/Main/Navigation2D" instance=ExtResource( 3 )]
 position = Vector2( 100, 100 )
 moveSpeed = 3200.0
 followDuration = 20.0
 
-[node name="Mimic Manager" type="YSort" parent="Viewport/Main"]
+[node name="Mimic Manager" type="YSort" parent="Viewport/Main/Navigation2D"]
 
-[node name="Mimic" parent="Viewport/Main/Mimic Manager" instance=ExtResource( 5 )]
-position = Vector2( 400, 0 )
+[node name="Mimic" parent="Viewport/Main/Navigation2D/Mimic Manager" instance=ExtResource( 5 )]
+position = Vector2( 400, -400 )
 
 [node name="Player" parent="Viewport/Main" instance=ExtResource( 2 )]
+<<<<<<< Updated upstream
 speed = 320.0
 turbo_light_energy = 1.5
+=======
+speed = 300.0
+>>>>>>> Stashed changes
 
 [node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource( 6 )
+material = SubResource( 161 )
 margin_top = 1080.0
 margin_right = 1920.0
 margin_bottom = 2160.0
 rect_scale = Vector2( 1, -1 )
-texture = SubResource( 7 )
+texture = SubResource( 162 )
 script = ExtResource( 7 )
