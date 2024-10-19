@@ -92,6 +92,7 @@ position = Vector2( 100, 100 )
 position = Vector2( 400, 0 )
 
 [node name="Player" parent="Viewport/Main" instance=ExtResource( 2 )]
+turbo_light_energy = 1.5
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource( 6 )
