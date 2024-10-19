@@ -17,7 +17,7 @@ animations = [ {
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-speed = 320.0
+speed = 1600.0
 default_light_energy = 1.0
 turbo_light_energy = 3.0
 

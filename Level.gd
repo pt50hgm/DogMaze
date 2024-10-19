@@ -24,6 +24,7 @@ func set_player_to_start():
 func set_maze_exit():
 	rng.randomize()
 	var randI = rng.randi_range(0, maze.exitYCoords.size()-1)
+	print(randI)
 	var exitYCoord = maze.exitYCoords[randI]
 	
 	var v1 = Vector2(maze.exitXCoord, exitYCoord)

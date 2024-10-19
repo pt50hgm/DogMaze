@@ -1,8 +1,12 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=103 format=2]
 
+[ext_resource path="res://Scripts/Maze.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Maze/hedge_tileset.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Placeholders/Rect.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Maze/carpet.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=163]
+extents = Vector2( 48, 4000 )
 
 [sub_resource type="OccluderPolygon2D" id=31]
 polygon = PoolVector2Array( 128, 128, 48, 128, 48, 48, 128, 48 )
@@ -641,6 +645,10 @@ outlines = [ PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 ) ]
 script = SubResource( 161 )
 
 [node name="Maze" type="Node2D"]
+script = ExtResource( 1 )
+exitXCoord = 72
+exitYCoords = [ 7, 19, 22, 37 ]
+floorTile = 4
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
@@ -654,6 +662,34 @@ modulate = Color( 0.196078, 0.0980392, 0, 1 )
 position = Vector2( 4500, 3000 )
 scale = Vector2( 150, 100 )
 texture = ExtResource( 4 )
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="LeftBound" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 64, 3000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/LeftBound"]
+shape = SubResource( 163 )
+
+[node name="RightBound" type="Area2D" parent="Boundaries"]
+position = Vector2( 9344, 3000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightBound"]
+shape = SubResource( 163 )
+
+[node name="StartPoints" type="Node2D" parent="."]
+
+[node name="StartPoint" type="Node2D" parent="StartPoints"]
+position = Vector2( 160, 256 )
+
+[node name="StartPoint2" type="Node2D" parent="StartPoints"]
+position = Vector2( 160, 2944 )
+
+[node name="StartPoint3" type="Node2D" parent="StartPoints"]
+position = Vector2( 160, 4480 )
+
+[node name="StartPoint4" type="Node2D" parent="StartPoints"]
+position = Vector2( 160, 5632 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
