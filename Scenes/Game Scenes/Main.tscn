@@ -52,12 +52,7 @@ followDuration = 20.0
 position = Vector2( 400, -400 )
 
 [node name="Player" parent="Viewport/Main" instance=ExtResource( 2 )]
-<<<<<<< Updated upstream
-speed = 320.0
 turbo_light_energy = 1.5
-=======
-speed = 300.0
->>>>>>> Stashed changes
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource( 161 )
