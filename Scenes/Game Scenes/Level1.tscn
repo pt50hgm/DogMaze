@@ -15,13 +15,13 @@ script = ExtResource( 5 )
 
 [node name="Dog" parent="Navigation2D" instance=ExtResource( 2 )]
 position = Vector2( 320, 320 )
-moveSpeed = 3200.0
+moveSpeed = 0.0
 followDuration = 20.0
 
 [node name="Mimic Manager" type="YSort" parent="Navigation2D"]
 
 [node name="Mimic" parent="Navigation2D/Mimic Manager" instance=ExtResource( 3 )]
-position = Vector2( 400, -400 )
+position = Vector2( 1408, 1024 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 160, 160 )
