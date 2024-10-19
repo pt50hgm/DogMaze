@@ -24,7 +24,7 @@ func _process(delta):
 # case of a reset, or the next one if the player finishes the current one.
 func start_scene(nextScene):
 	self.remove_child(get_child(0))
-	self.add_child(load(nextScene).instance())
+	self.add_child(nextScene.instance())
 	isTransitioning = false
 
 func transition_to_next_scene(nextScene):
