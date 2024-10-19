@@ -1,13 +1,47 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Sprites/Placeholders/Ellipse.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Mimics/mimicidle.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Mimic.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Mimics/mimicleft.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Mimics/partboneidle.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Mimics/seeingmimicidle.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Mimics/partboneleft.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Mimics/partboneright.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Mimics/seeingmimicleft.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Mimics/seeingmimicright.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Mimics/personmimicright.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Mimics/hollowmimicidle.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Mimics/hollowmimicright.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Mimics/personmimicleft.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Mimics/mimicright.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Mimics/hollowmimicleft.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Mimics/personmimicidle.png" type="Texture" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 15 ) ],
 "loop": true,
-"name": "default",
+"name": "hollow_mimic",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "mimic",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "part_bone",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 16 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "person_mimic",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "seeing_mimic",
 "speed": 5.0
 } ]
 
@@ -23,6 +57,9 @@ jumpscareDistance = 50.0
 self_modulate = Color( 1, 0, 0, 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
+animation = "person_mimic"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
