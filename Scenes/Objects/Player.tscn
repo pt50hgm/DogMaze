@@ -116,12 +116,14 @@ current = true
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite" type="AnimatedSprite" parent="Graphics"]
-light_mask = 64
+light_mask = 2
 rotation = 1.5708
+z_index = -2
 frames = SubResource( 1 )
 animation = "walk"
 
 [node name="Light2D" type="Light2D" parent="Graphics"]
+position = Vector2( 50, 50 )
 texture = ExtResource( 3 )
 color = Color( 1, 1, 1, 0.588235 )
 mode = 3

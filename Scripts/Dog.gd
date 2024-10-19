@@ -50,7 +50,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed("call_dog"):
 		set_state("call")
 	move(delta)
-	
 
 func is_illuminated() -> bool:
 	var dogPosition = self.position
