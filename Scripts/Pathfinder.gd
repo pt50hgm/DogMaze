@@ -50,6 +50,3 @@ func move(delta):
 		navigationAgent.set_velocity(velocity)
 	move_and_slide(velocity)
 	
-func _physics_process(delta):
-	move(delta)
-	

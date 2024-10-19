@@ -8,6 +8,7 @@ export var turbo_light_energy : float
 
 onready var camera : Camera2D = $Camera2D
 onready var viewportContainer = get_node("/root/ViewportContainer")
+onready var graphics = $Graphics
 onready var light : Light2D = $Graphics/Light2D
 
 func get_input() -> void:
@@ -22,6 +23,11 @@ func get_input() -> void:
 	if Input.is_action_pressed('up'):
 		velocity.y -= 1
 	velocity = velocity.normalized() * speed
+	
+	if graphics.rotation < 0:
+		graphics.rotation += 2*PI
+	elif graphics.rotation > 2*PI:
+		graphics.rotation -= 2*PI 
 
 func _physics_process(delta):
 	get_input()
