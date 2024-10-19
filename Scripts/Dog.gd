@@ -15,7 +15,6 @@ var velocity : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-<<<<<<< Updated upstream
 	state = "guidePlayer"
 
 func followPlayer(delta):
@@ -42,18 +41,12 @@ func do_state_action(delta):
 		guidePlayer(delta)
 	elif state == "call":
 		set_target_location(Player.position)
-=======
-	set_target_location(Player.get_position())
->>>>>>> Stashed changes
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-<<<<<<< Updated upstream
 	do_state_action(delta)
-=======
-	set_target_location(Player.get_position())
->>>>>>> Stashed changes
+
 	if Input.is_action_pressed("call_dog"):
 		set_state("call")
 	
