@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Placeholders/Ellipse.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Objects/Mimic.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 25.0
+
+[node name="Mimic" type="KinematicBody2D"]
+position = Vector2( 700, 0 )
+script = ExtResource( 2 )
+jumpscareDistance = 50.0
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+self_modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
