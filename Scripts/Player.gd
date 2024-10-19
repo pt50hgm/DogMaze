@@ -10,6 +10,7 @@ onready var camera : Camera2D = $Camera2D
 onready var viewportContainer = get_node("/root/ViewportContainer")
 onready var graphics = $Graphics
 onready var light : Light2D = $Graphics/Light2D
+onready var _animation_player = $Graphics/AnimationPlayer
 
 func get_input() -> void:
 	# Detect up/down/left/right keystate and only move when pressed
@@ -22,6 +23,7 @@ func get_input() -> void:
 		velocity.y += 1
 	if Input.is_action_pressed('up'):
 		velocity.y -= 1
+	
 	velocity = velocity.normalized() * speed
 	
 	if graphics.rotation < -PI:
@@ -45,3 +47,9 @@ func _process(delta):
 		light.energy = turbo_light_energy
 	else:
 		light.energy = default_light_energy
+	
+	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
+		_animation_player.play("walk")
+	else:
+		_animation_player.play("default")
+		_animation_player.stop()
