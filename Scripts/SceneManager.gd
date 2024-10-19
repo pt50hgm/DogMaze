@@ -37,4 +37,3 @@ func restart_level():
 func next_level():
 	sceneNum += 1
 	transition_to_next_scene(scenes[sceneNum])
-

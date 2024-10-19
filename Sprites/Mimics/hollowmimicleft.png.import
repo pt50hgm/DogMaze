@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/circle.png-01f5700214c92c4e44831f3a2bdc32ba.stex"
+path="res://.import/hollowmimicleft.png-fd85269299298cad47042ecc3824da9a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Placeholders/circle.png"
-dest_files=[ "res://.import/circle.png-01f5700214c92c4e44831f3a2bdc32ba.stex" ]
+source_file="res://Sprites/Mimics/hollowmimicleft.png"
+dest_files=[ "res://.import/hollowmimicleft.png-fd85269299298cad47042ecc3824da9a.stex" ]
 
 [params]
 

@@ -29,10 +29,6 @@ func set_state(s):
 			rng.randf_range(-wanderDistance, wanderDistance),
 			rng.randf_range(-wanderDistance, wanderDistance)))
 		set_target_location(randPos)
-		moveSpeed = 5000.0
-	elif s == "chase":
-		moveSpeed = 10000.0
-
 
 func stateWander(delta):
 	changeStateTimer += delta
@@ -41,7 +37,6 @@ func stateWander(delta):
 		set_state("chase")
 	elif changeStateTimer > wanderToWanderDelay:
 		set_state("wander")
-	
 		
 func stateChase(delta):
 	set_target_location(player.position)
@@ -60,7 +55,6 @@ func do_state_action(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	do_state_action(delta)
-	
 	move(delta)
 	if self.position.distance_squared_to(player.position) < jumpscareDistance*jumpscareDistance:
 		level.start_jump_scare(Node2D.new())
