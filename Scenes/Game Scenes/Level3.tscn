@@ -22,6 +22,7 @@ followDuration = 20.0
 
 [node name="Mimic" parent="Navigation2D/Mimic Manager" instance=ExtResource( 3 )]
 position = Vector2( 400, -400 )
+jumpscareDistance = 192
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 160, 160 )
