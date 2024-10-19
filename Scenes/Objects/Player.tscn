@@ -17,9 +17,9 @@ animations = [ {
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-speed = 160.0
+speed = 320.0
 default_light_energy = 1.0
-turbo_light_energy = 10.0
+turbo_light_energy = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -35,6 +35,7 @@ scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="Graphics"]
+visible = false
 texture = ExtResource( 3 )
 color = Color( 1, 1, 1, 0.588235 )
 mode = 3

@@ -14,6 +14,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var viewport : Viewport = get_node("/root/ViewportContainer/Viewport")
-	var vTexture = viewport.get_texture()
-	texture = vTexture
+	if viewport != null:
+		var vTexture = viewport.get_texture()
+		texture = vTexture
 	

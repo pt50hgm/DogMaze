@@ -8,7 +8,6 @@ export var turbo_light_energy : float
 
 onready var camera : Camera2D = $Camera2D
 onready var viewportContainer = get_node("/root/ViewportContainer")
-onready var viewport : Viewport = get_node("/root/ViewportContainer/Viewport")
 onready var light : Light2D = $Graphics/Light2D
 
 func get_input() -> void:
