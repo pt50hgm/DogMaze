@@ -48,7 +48,6 @@ func _physics_process(delta):
 	do_state_action(delta)
 	if Input.is_action_pressed("call_dog"):
 		set_state("call")
-	
 	move(delta)
 	
 
