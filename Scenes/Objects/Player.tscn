@@ -7,7 +7,8 @@
 [ext_resource path="res://Sprites/Player/stand_128x128.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=2]
-height = 25.0
+radius = 40.0
+height = 40.0
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -102,6 +103,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+z_index = 1
 script = ExtResource( 2 )
 speed = 1600.0
 default_light_energy = 1.0
@@ -123,7 +125,7 @@ frames = SubResource( 1 )
 animation = "walk"
 
 [node name="Light2D" type="Light2D" parent="Graphics"]
-position = Vector2( 50, 50 )
+position = Vector2( 0, 50 )
 texture = ExtResource( 3 )
 color = Color( 1, 1, 1, 0.588235 )
 mode = 3
