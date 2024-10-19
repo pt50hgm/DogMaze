@@ -1,6 +1,12 @@
 extends KinematicBody2D
 
 export var speed : float
+export var max_stamina : float = 3
+onready var stamina = max_stamina
+var sprint_multiplier : float = 1
+var allowed_to_sprint : bool = true
+export var sprint_speed : float = 2
+
 var velocity : Vector2 = Vector2.ZERO
 
 export var default_light_energy : float
@@ -24,15 +30,33 @@ func get_input() -> void:
 	if Input.is_action_pressed('up'):
 		velocity.y -= 1
 	
-	velocity = velocity.normalized() * speed
-	
 	if graphics.rotation < -PI:
 		graphics.rotation += 2*PI
 	elif graphics.rotation > PI:
 		graphics.rotation -= 2*PI 
 
+func check_sprint(delta) -> void:
+	if Input.is_action_just_pressed('sprint'):
+		allowed_to_sprint = true
+
+	if allowed_to_sprint:
+		if stamina <= 0:
+			allowed_to_sprint = false
+		else:
+			stamina -= delta
+			sprint_multiplier = sprint_speed
+	else:
+		if stamina < max_stamina:
+			stamina += delta * 0.5
+		sprint_multiplier = 1
+	print(stamina)
+	print(sprint_multiplier)
+	print(allowed_to_sprint)
+	
 func _physics_process(delta):
 	get_input()
+	check_sprint(delta)
+	velocity = velocity.normalized() * speed * sprint_multiplier	
 	move_and_slide(velocity)
 
 func _input(event):
