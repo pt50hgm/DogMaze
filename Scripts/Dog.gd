@@ -4,89 +4,74 @@ export var moveSpeed : float = 5000.0
 export var followDuration: float
 
 onready var Main = get_parent()
-onready var Player = get_node("/root/ViewportContainer/Viewport/Main/Player")
-onready var playerLight = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
+onready var Graphics = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics")
+onready var light = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
 
 var followTimer : float
 var followPlayer = false
 var velocity : Vector2 = Vector2.ZERO
 
-
+export var followDuration: float
+export var guideDistance: int = 25000
+export var dogTimer: float = 3
+var illumCounter : float = 0
+var notIllumCounter : float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+
+func do_state_action(delta):
+	if state == "followPlayer":
+		set_target_location(Player.position)
+	elif state == "guidePlayer":
+		pass
+	elif state == "call":
+		set_target_location(Player.position)
 	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	do_state_action(delta)
+	
 	if Input.is_action_pressed("call_dog"):
-		followPlayer = true
-		followTimer = followDuration
+		set_state("call")
 	
-	if followPlayer:
-		followTimer -= delta
-		if followTimer <= 0:
-			followPlayer = false
-			
-		set_target_location(Player.get_position()) # get player position
+	if self.is_illuminated() or self.position.distance_squared_to(Player.position) < guideDistance:
+		notIllumCounter = 0
+		illumCounter += delta
+		print("illuminated")
+		if illumCounter > dogTimer:
+			print("guiding")
+			set_state("guidePlayer")
+	elif not self.is_illuminated():
+		illumCounter = 0
+		print("not illuminated")
+		notIllumCounter += delta
+		if notIllumCounter > dogTimer:
+			print("following")
+			set_pathfind(Player.position, moveSpeed, followDuration)
+			set_state("followPlayer")
+	print(illumCounter)
+	print(notIllumCounter)
 	
-	var moveDirection = get_dir_to_target()
-	if arrived_at_target():
-		#Set animation to idle
-		velocity = Vector2.ZERO
-	else:
-		velocity = moveDirection * moveSpeed * delta
-		navigationAgent.set_velocity(velocity)
-	move_and_slide(velocity)
-	
-	if Input.is_action_pressed("turbo_charge"):
-		if is_illuminated(playerLight):
-			print("i'm illuminated!")
-			pass
-		else:
-			print("sadge")
 
-func is_illuminated(light: Light2D) -> bool:
+func is_illuminated() -> bool:
 	var dogPosition = self.position
 
 	var lightPosition = light.global_position
-	var playerRotation = Player.rotation
+	var graphicsRotation = Graphics.rotation
+	
+	if graphicsRotation > 2*PI: graphicsRotation -= 2*PI
+	elif graphicsRotation < 0: graphicsRotation += 2*PI
 	
 	var angleToDog = lightPosition.angle_to_point(dogPosition)
 	if angleToDog > 0:
 		angleToDog -= PI
 	else: angleToDog += PI
+#	print("angle to dog: ", rad2deg(angleToDog))
+#	print("graphics angle: ", rad2deg(graphicsRotation))
 	
-	print("player rotation: ", rad2deg(playerRotation))
-	print("angle_to_dog:", rad2deg(angleToDog))
-	
-	return (abs(angleToDog - playerRotation) < PI/4/2) or \
-	(abs(angleToDog + 2*PI - playerRotation) < PI/4/2) or \
-	(abs(angleToDog - playerRotation + 2*PI) < PI/4/2)
-	
-	print("\n\ndog: ", dogPosition)
-	print("light_position: ", lightPosition)
-	return true
-
-	# Calculate the light's effective radius (length of the cone)
-#	var light_radius = light.texture.get_size().x * light.scale.x
-#
-#	# Define the spread angle of the cone (in radians)
-#	var spread_angle = deg2rad(45) # Example spread of 45 degrees (adjust as needed)
-#
-#	# Calculate the two base points of the triangle
-#	var direction = Vector2(1, 0).rotated(light_rotation).normalized() * light_radius
-#	var left_point = light_position + direction.rotated(-spread_angle / 2)
-#	var right_point = light_position + direction.rotated(spread_angle / 2)
-#
-#	# Check if the dog's position is inside the triangle
-#	return point_in_triangle(dog_position, light_position, left_point, right_point) and detect_collision():
-
-	# Function to check if a point is inside a triangle
-#func point_in_triangle(p: Vector2, a: Vector2, b: Vector2, c: Vector2) -> bool:
-#	var d1 = (p.x - b.x) * (a.y - b.y) - (a.x - b.x) * (p.y - b.y)
-#	var d2 = (p.x - c.x) * (b.y - c.y) - (b.x - c.x) * (p.y - c.y)
-#	var d3 = (p.x - a.x) * (c.y - a.y) - (c.x - a.x) * (p.y - a.y)
-#	var has_neg = (d1 < 0) or (d2 < 0) or (d3 < 0)
-#	var has_pos = (d1 > 0) or (d2 > 0) or (d3 > 0)
-#	return not (has_neg and has_pos)
+	return (abs(angleToDog - graphicsRotation) < PI/4/2) or \
+	(abs(angleToDog + 2*PI - graphicsRotation) < PI/4/2) or \
+	(abs(angleToDog - graphicsRotation + 2*PI) < PI/4/2)

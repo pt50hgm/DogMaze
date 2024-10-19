@@ -42,3 +42,5 @@ range_z_min = -10
 range_z_max = 10
 shadow_enabled = true
 shadow_color = Color( 1, 0.780392, 0.027451, 0 )
+
+[connection signal="input_event" from="." to="." method="_on_Player_input_event"]
