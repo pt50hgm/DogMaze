@@ -46,7 +46,11 @@ func start_jump_scare(animation):
 func _ready():
 	set_player_to_start()
 	set_maze_exit()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	var exitX = 128 * (maze.exitXCoord + 1)
+	if player.position.x > exitX:
+		if not sceneManager.isTransitioning:
+			sceneManager.next_level()

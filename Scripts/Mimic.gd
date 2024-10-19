@@ -29,6 +29,7 @@ func set_state(s):
 			rng.randf_range(-wanderDistance, wanderDistance),
 			rng.randf_range(-wanderDistance, wanderDistance)))
 		set_target_location(randPos)
+		moveSpeed = 5000.0
 
 func stateWander(delta):
 	changeStateTimer += delta

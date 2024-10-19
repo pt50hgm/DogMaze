@@ -52,6 +52,7 @@ position = Vector2( 700, 0 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+rotation = 1.5708
 frames = SubResource( 1 )
 animation = "person_mimic"
 

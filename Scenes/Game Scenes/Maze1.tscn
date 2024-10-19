@@ -692,12 +692,6 @@ position = Vector2( 64, 3000 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/LeftBound"]
 shape = SubResource( 167 )
 
-[node name="RightBound" type="Area2D" parent="Boundaries"]
-position = Vector2( 8960, 3000 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightBound"]
-shape = SubResource( 167 )
-
 [node name="StartPoints" type="Node2D" parent="."]
 
 [node name="StartPoint" type="Node2D" parent="StartPoints"]
