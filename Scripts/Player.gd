@@ -45,8 +45,3 @@ func _process(delta):
 		light.energy = turbo_light_energy
 	else:
 		light.energy = default_light_energy
-	
-
-
-func _on_Player_input_event(viewport, event, shape_idx):
-	pass # Replace with function body.
