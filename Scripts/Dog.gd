@@ -1,11 +1,15 @@
 extends "res://Scripts/Pathfinder.gd"
 
 export var moveSpeed : float = 5000.0
+export var followDuration: float
 
-var velocity : Vector2 = Vector2.ZERO
 onready var Main = get_parent()
 onready var Graphics = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics")
 onready var light = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
+
+var followTimer : float
+var followPlayer = false
+var velocity : Vector2 = Vector2.ZERO
 
 export var followDuration: float
 export var guideDistance: int = 25000

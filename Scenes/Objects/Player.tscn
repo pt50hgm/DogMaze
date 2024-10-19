@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sprites/Placeholders/Ellipse.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Placeholders/WideFlashlight.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Flashlight512.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=2]
 height = 25.0
