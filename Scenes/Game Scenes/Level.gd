@@ -15,12 +15,14 @@ onready var tileMap = $Navigation2D/Maze/TileMap
 var rng = RandomNumberGenerator.new()
 
 func set_player_to_start():
+	rng.randomize()
 	var randI = rng.randi_range(0, startPoints.size()-1)
 	var pos = startPoints[randI].position
 	player.position = pos
 	dog.position = player.position + dogStartOffset
 
 func set_maze_exit():
+	rng.randomize()
 	var randI = rng.randi_range(0, maze.exitYCoords.size()-1)
 	var exitYCoord = maze.exitYCoords[randI]
 	
