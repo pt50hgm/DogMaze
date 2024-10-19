@@ -6,6 +6,7 @@ extends Node2D
 # var b = "text"
 export var dogStartOffset = Vector2(100, 100)
 
+onready var sceneManager = get_node("/root/ViewportContainer/Viewport/SceneManager")
 onready var startPoints = $Navigation2D/Maze/StartPoints.get_children()
 onready var player = $Player
 onready var dog = $Navigation2D/Dog
@@ -24,7 +25,6 @@ func set_player_to_start():
 func set_maze_exit():
 	rng.randomize()
 	var randI = rng.randi_range(0, maze.exitYCoords.size()-1)
-	print(randI)
 	var exitYCoord = maze.exitYCoords[randI]
 	
 	var v1 = Vector2(maze.exitXCoord, exitYCoord)
@@ -33,12 +33,24 @@ func set_maze_exit():
 	tileMap.set_cellv(v2, maze.floorTile)
 	tileMap.update_bitmask_area(v1)
 	tileMap.update_bitmask_area(v2)
+
+
+func start_jump_scare(animation):
+	# Instantiate the animation node
+  #	yield() until animation is done
+	if not sceneManager.isTransitioning:
+		sceneManager.restart_level()
+
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_player_to_start()
 	set_maze_exit()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	var exitX = 128 * (maze.exitXCoord + 1)
+	if player.position.x > exitX:
+		if not sceneManager.isTransitioning:
+			sceneManager.next_level()

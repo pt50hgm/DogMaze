@@ -48,6 +48,7 @@ func move(delta):
 		velocity = moveDirection * moveSpeed * delta
 		navigationAgent.set_velocity(velocity)
 	move_and_slide(velocity)
+	look_at(velocity + position)
 	
 
 func is_illuminated() -> bool:

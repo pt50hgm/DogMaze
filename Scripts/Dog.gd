@@ -14,7 +14,7 @@ var velocity : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	state = "guidePlayer"
+	set_state("guidePlayer")
 
 func set_state(s):
 	state = s
