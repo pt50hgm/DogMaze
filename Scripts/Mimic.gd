@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var Player = get_node("/root/ViewportContainer/Viewport/Main/Player")
+onready var Player = get_node(Util.levelPath + "/Player")
 export var jumpscareDistance : float
 
 func _ready():

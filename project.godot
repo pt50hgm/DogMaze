@@ -14,6 +14,11 @@ config/name="DogMaze"
 run/main_scene="res://Scenes/Game Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SceneTransition="*res://Scripts/SceneTransition.gd"
+Util="*res://Scripts/Util.gd"
+
 [display]
 
 window/size/width=1920

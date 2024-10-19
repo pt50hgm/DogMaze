@@ -5,9 +5,10 @@ export var guideDistance: int = 25000 * 25000
 export var dogTimer: float = 3.0
 
 onready var Main = get_parent()
-onready var Graphics = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics")
-onready var light = get_node("/root/ViewportContainer/Viewport/Main/Player/Graphics/Light2D")
-onready var Player = get_node("/root/ViewportContainer/Viewport/Main/Player")
+onready var Player = get_node(Util.levelPath + "/Player")
+onready var Graphics = get_node(Util.levelPath + "/Player/Graphics")
+onready var light = get_node(Util.levelPath + "/Player/Graphics/Light2D")
+
 
 var followTimer : float
 var followPlayer = false
@@ -48,7 +49,6 @@ func _physics_process(delta):
 	do_state_action(delta)
 	if Input.is_action_pressed("call_dog"):
 		set_state("call")
-	
 	move(delta)
 	
 

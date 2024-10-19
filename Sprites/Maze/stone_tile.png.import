@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/circle.png-01f5700214c92c4e44831f3a2bdc32ba.stex"
+path="res://.import/stone_tile.png-7d9a58d37a08fc1b504dcfeb8d4802ed.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Placeholders/circle.png"
-dest_files=[ "res://.import/circle.png-01f5700214c92c4e44831f3a2bdc32ba.stex" ]
+source_file="res://Sprites/Maze/stone_tile.png"
+dest_files=[ "res://.import/stone_tile.png-7d9a58d37a08fc1b504dcfeb8d4802ed.stex" ]
 
 [params]
 

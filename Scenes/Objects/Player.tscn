@@ -35,6 +35,7 @@ scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="Graphics"]
+visible = false
 texture = ExtResource( 3 )
 color = Color( 1, 1, 1, 0.588235 )
 mode = 3
