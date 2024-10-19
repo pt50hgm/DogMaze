@@ -39,7 +39,7 @@ func check_sprint(delta) -> void:
 	if Input.is_action_just_pressed('sprint'):
 		allowed_to_sprint = true
 
-	if allowed_to_sprint:
+	if allowed_to_sprint and Input.is_action_pressed('sprint'):
 		if stamina <= 0:
 			allowed_to_sprint = false
 		else:

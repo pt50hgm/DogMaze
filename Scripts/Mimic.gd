@@ -1,7 +1,7 @@
 extends "res://Scripts/Pathfinder.gd"
 
 export var jumpscareDistance : int = 1.5 * 128
-export var wanderDistance : int = 2.5 * 128*3
+export var wanderDistance : int = 3 * 128*3
 export var wanderToChaseDistance : int = 1.5 * 128*3
 export var chaseToWanderDelay : float = 10.0
 export var wanderToWanderDelay : float = 10.0
