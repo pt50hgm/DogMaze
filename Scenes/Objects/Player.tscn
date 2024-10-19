@@ -1,28 +1,117 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Sprites/Placeholders/Ellipse.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Player/right_128x128.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Player/Flashlight512.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/FlashlightOffset.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/left_128x128.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/stand_128x128.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=2]
-height = 25.0
+radius = 40.0
+height = 40.0
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 3.0
 } ]
 
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/Sprite:frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frames")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../AnimationPlayer:root_node")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ NodePath("../Sprite") ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walk" ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "walk"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
 [node name="Player" type="KinematicBody2D"]
+z_index = 1
 script = ExtResource( 2 )
-speed = 320.0
+speed = 1600.0
 default_light_energy = 1.0
 turbo_light_energy = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -30,17 +119,24 @@ current = true
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite" type="AnimatedSprite" parent="Graphics"]
-self_modulate = Color( 0, 0, 1, 1 )
-scale = Vector2( 0.5, 0.5 )
+rotation = 1.5708
+z_index = 5
 frames = SubResource( 1 )
+animation = "walk"
 
 [node name="Light2D" type="Light2D" parent="Graphics"]
+visible = false
+position = Vector2( 0, 50 )
 texture = ExtResource( 3 )
 color = Color( 1, 1, 1, 0.588235 )
 mode = 3
-range_z_min = -10
-range_z_max = 10
+range_z_min = -15
+range_z_max = 15
 shadow_enabled = true
 shadow_color = Color( 1, 0.780392, 0.027451, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+anims/RESET = SubResource( 4 )
+anims/walk = SubResource( 3 )
 
 [connection signal="input_event" from="." to="." method="_on_Player_input_event"]

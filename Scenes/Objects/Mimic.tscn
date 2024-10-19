@@ -11,18 +11,23 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
-height = 25.0
+[sub_resource type="CircleShape2D" id=2]
 
 [node name="Mimic" type="KinematicBody2D"]
 position = Vector2( 700, 0 )
 script = ExtResource( 2 )
-jumpscareDistance = 50.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 self_modulate = Color( 1, 0, 0, 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 50.0
+path_max_distance = 30.0
+avoidance_enabled = true
+radius = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

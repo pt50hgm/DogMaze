@@ -3,7 +3,11 @@ extends KinematicBody2D
 onready var navigationAgent : NavigationAgent2D = $NavigationAgent2D
 
 export var state : String
-export var moveSpeed : float = 5000.0
+export var moveSpeed : float
+
+onready var player = get_node(Util.levelPath + "/Player")
+onready var graphics = get_node(Util.levelPath + "/Player/Graphics")
+onready var light = get_node(Util.levelPath + "/Player/Graphics/Light2D")
 
 var targetLocation : Vector2 = Vector2.ZERO
 var followPosition : Vector2
@@ -31,12 +35,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
-func set_state(s):
-	state = s
-	changeStateTimer = 0
-	
+	pass	
 
 func move(delta):
 	var velocity
@@ -50,6 +49,23 @@ func move(delta):
 		navigationAgent.set_velocity(velocity)
 	move_and_slide(velocity)
 	
-func _physics_process(delta):
-	move(delta)
+
+func is_illuminated() -> bool:
+	var dogPosition = self.position
+
+	var lightPosition = light.global_position
+	var graphicsRotation = graphics.rotation
 	
+	if graphicsRotation > 2*PI: graphicsRotation -= 2*PI
+	elif graphicsRotation < 0: graphicsRotation += 2*PI
+	
+	var angleToDog = lightPosition.angle_to_point(dogPosition)
+	if angleToDog > 0:
+		angleToDog -= PI
+	else: angleToDog += PI
+#	print("angle to dog: ", rad2deg(angleToDog))
+#	print("graphics angle: ", rad2deg(graphicsRotation))
+	
+	return (abs(angleToDog - graphicsRotation) < PI/4/2) or \
+	(abs(angleToDog + 2*PI - graphicsRotation) < PI/4/2) or \
+	(abs(angleToDog - graphicsRotation + 2*PI) < PI/4/2)
