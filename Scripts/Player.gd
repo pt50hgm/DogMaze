@@ -51,5 +51,4 @@ func _process(delta):
 	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
 		_animation_player.play("walk")
 	else:
-		_animation_player.play("default")
 		_animation_player.stop()
