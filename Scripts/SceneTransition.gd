@@ -2,14 +2,14 @@ extends CanvasLayer
 
 onready var sceneManager = get_node("/root/ViewportContainer/Viewport/SceneManager")
 
-func TransitionBlack(nextScene):
+func transition_black(nextScene):
 	$AnimationPlayer.play("DissolveBlack")
 	yield($AnimationPlayer, "animation_finished")
-	sceneManager.StartLevel(nextScene)
+	sceneManager.start_scene(nextScene)
 	$AnimationPlayer.play_backwards("DissolveBlack")
 
-func TransitionWhite(nextScene):
+func transition_white(nextScene):
 	$AnimationPlayer.play("DissolveWhite")
 	yield($AnimationPlayer, "animation_finished")
-	sceneManager.StartLevel(nextScene)
+	sceneManager.start_scene(nextScene)
 	$AnimationPlayer.play_backwards("DissolveWhite")

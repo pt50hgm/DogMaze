@@ -22,11 +22,18 @@ func _process(delta):
 
 # End the current level and start a new one. It may be the same level in the
 # case of a reset, or the next one if the player finishes the current one.
-func StartLevel(nextScene):
-	self.remove_child($Scene)
+func start_scene(nextScene):
+	self.remove_child(get_child(0))
 	self.add_child(load(nextScene).instance())
 	isTransitioning = false
 
-func start_next_scene(nextScene):
-	SceneTransition.TransitionBlack(nextScene)
+func transition_to_next_scene(nextScene):
+	SceneTransition.transition_black(nextScene)
 	isTransitioning = true
+
+func restart_level():
+	transition_to_next_scene(scenes[sceneNum])
+
+func next_level():
+	sceneNum += 1
+	transition_to_next_scene(scenes[sceneNum])
