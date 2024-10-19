@@ -1,15 +1,13 @@
 extends KinematicBody2D
 
 onready var navigationAgent : NavigationAgent2D = $NavigationAgent2D
+
 export var state : String
+export var moveSpeed : float = 5000.0
 
 var targetLocation : Vector2 = Vector2.ZERO
-var followPlayer : bool
-var followTimer : float
-var movementSpeed : float
 var followPosition : Vector2
-
-onready var Player = get_node("/root/ViewportContainer/Viewport/Main/Player")
+var changeStateTimer : float = 0
 
 func set_target_location(target : Vector2) -> void:
 	navigationAgent.set_target_location(target)
@@ -35,17 +33,12 @@ func _ready():
 func _process(delta):
 	pass
 
-func set_pathfind(position: Vector2, speed, timer) -> void:
-	movementSpeed = speed
-	followTimer = timer
-	followPosition = position
-
 func set_state(s):
 	state = s
-
-func _physics_process(delta):
-#	do_state_action(delta)
+	changeStateTimer = 0
 	
+
+func move(delta):
 	var velocity
 	var moveDirection = get_dir_to_target()
 	
@@ -53,6 +46,10 @@ func _physics_process(delta):
 		#Set animation to idle
 		velocity = Vector2.ZERO
 	else:
-		velocity = moveDirection * movementSpeed * delta
+		velocity = moveDirection * moveSpeed * delta
 		navigationAgent.set_velocity(velocity)
 	move_and_slide(velocity)
+	
+func _physics_process(delta):
+	move(delta)
+	

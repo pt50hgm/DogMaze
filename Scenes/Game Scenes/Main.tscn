@@ -41,6 +41,7 @@ render_target_update_mode = 3
 
 [node name="Dog" parent="Viewport/Main" instance=ExtResource( 3 )]
 position = Vector2( 100, 100 )
+moveSpeed = 3200.0
 followDuration = 20.0
 
 [node name="Mimic Manager" type="YSort" parent="Viewport/Main"]
@@ -49,9 +50,8 @@ followDuration = 20.0
 position = Vector2( 400, 0 )
 
 [node name="Player" parent="Viewport/Main" instance=ExtResource( 2 )]
-
-turbo_light_energy = 1.5
 speed = 320.0
+turbo_light_energy = 1.5
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource( 6 )
