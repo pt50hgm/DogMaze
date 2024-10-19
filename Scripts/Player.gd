@@ -8,6 +8,7 @@ var allowed_to_sprint : bool = true
 export var sprint_speed : float = 2
 
 var velocity : Vector2 = Vector2.ZERO
+var animation = ""
 
 export var default_light_energy : float
 export var turbo_light_energy : float
@@ -16,7 +17,15 @@ onready var camera : Camera2D = $Camera2D
 onready var viewportContainer = get_node("/root/ViewportContainer")
 onready var graphics = $Graphics
 onready var light : Light2D = $Graphics/Light2D
-onready var _animation_player = $Graphics/AnimationPlayer
+onready var sprite : AnimatedSprite = $Graphics/Sprite
+
+func _ready():
+	pass
+
+func set_animation(newAnimation):
+	if animation != newAnimation:
+		animation = newAnimation
+		sprite.play(animation)
 
 func get_input() -> void:
 	# Detect up/down/left/right keystate and only move when pressed
@@ -67,8 +76,7 @@ func _process(delta):
 		light.energy = turbo_light_energy
 	else:
 		light.energy = default_light_energy
-	
 	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
-		_animation_player.play("walk")
+		set_animation("walk")
 	else:
-		_animation_player.play("idle")
+		set_animation("idle")

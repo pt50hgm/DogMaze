@@ -8,10 +8,16 @@ export var moveSpeed : float
 onready var player = get_node(Util.levelPath + "/Player")
 onready var graphics = get_node(Util.levelPath + "/Player/Graphics")
 onready var light = get_node(Util.levelPath + "/Player/Graphics/Light2D")
+onready var sprite = $Sprite
 
 var targetLocation : Vector2 = Vector2.ZERO
 var followPosition : Vector2
 var changeStateTimer : float = 0
+
+func set_animation(newAnimation):
+	if animation != newAnimation:
+		animation = newAnimation
+		sprite.play(animation)
 
 func set_target_location(target : Vector2) -> void:
 	navigationAgent.set_target_location(target)
