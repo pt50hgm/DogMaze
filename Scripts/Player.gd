@@ -49,9 +49,6 @@ func check_sprint(delta) -> void:
 		if stamina < max_stamina:
 			stamina += delta * 0.5
 		sprint_multiplier = 1
-	print(stamina)
-	print(sprint_multiplier)
-	print(allowed_to_sprint)
 	
 func _physics_process(delta):
 	get_input()
@@ -65,7 +62,6 @@ func _input(event):
 		event = make_input_local(event)
 		$Graphics.look_at(event.position + position)
 
-
 func _process(delta):
 	if Input.is_action_pressed("turbo_charge"):
 		light.energy = turbo_light_energy
@@ -75,4 +71,4 @@ func _process(delta):
 	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
 		_animation_player.play("walk")
 	else:
-		_animation_player.stop()
+		_animation_player.play("idle")

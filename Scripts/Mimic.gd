@@ -5,6 +5,7 @@ export var wanderDistance : int = 2.5 * 128*3
 export var wanderToChaseDistance : int = 1.5 * 128*3
 export var chaseToWanderDelay : float = 10.0
 export var wanderToWanderDelay : float = 10.0
+export var mimicType : String
 
 onready var level = get_node(Util.levelPath)
 
