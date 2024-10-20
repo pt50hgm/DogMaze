@@ -106,3 +106,4 @@ func _process(delta):
 		if abs(sprite.frame - prevFrame) == 2:
 			prevFrame = sprite.frame
 			level.soundManager.play_footsteps("footsteps", sceneManager.sceneNum, 0)
+
