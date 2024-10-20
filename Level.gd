@@ -13,6 +13,7 @@ onready var dog = $Navigation2D/Dog
 onready var maze = $Navigation2D/Maze
 onready var tileMap = $Navigation2D/Maze/TileMap
 
+var exitPos : Vector2
 var rng = RandomNumberGenerator.new()
 
 func set_player_to_start():
@@ -26,6 +27,7 @@ func set_maze_exit():
 	rng.randomize()
 	var randI = rng.randi_range(0, maze.exitYCoords.size()-1)
 	var exitYCoord = maze.exitYCoords[randI]
+	exitPos = Vector2(maze.exitXCoord + 0.5, exitYCoord + 0.5) * 128
 	
 	var v1 = Vector2(maze.exitXCoord, exitYCoord)
 	var v2 = Vector2(maze.exitXCoord, exitYCoord+1)

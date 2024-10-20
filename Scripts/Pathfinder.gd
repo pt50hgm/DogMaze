@@ -9,10 +9,14 @@ onready var player = get_node(Util.levelPath + "/Player")
 onready var graphics = get_node(Util.levelPath + "/Player/Graphics")
 onready var light = get_node(Util.levelPath + "/Player/Graphics/Light2D")
 onready var sprite = $Sprite
+onready var maze = get_node(Util.levelPath + "/Navigation2D/Maze")
+onready var level = get_node(Util.levelPath)
 
 var targetLocation : Vector2 = Vector2.ZERO
 var followPosition : Vector2
 var changeStateTimer : float = 0
+var animation = ""
+var rng = RandomNumberGenerator.new()
 
 func set_animation(newAnimation):
 	if animation != newAnimation:
