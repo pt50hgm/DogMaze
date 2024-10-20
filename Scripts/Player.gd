@@ -1,16 +1,11 @@
 extends KinematicBody2D
 
 export var speed : float
-<<<<<<< Updated upstream
-var velocity : Vector2 = Vector2.ZERO
-
-=======
 export var max_stamina : float = 3
 onready var stamina = max_stamina
 export var sprint_speed : float = 2
 export var turboCoolDown = 30.0
 export var turboFlashDuration = 3.0
->>>>>>> Stashed changes
 export var default_light_energy : float
 export var turbo_light_energy : float
 
@@ -18,9 +13,6 @@ onready var camera : Camera2D = $Camera2D
 onready var viewportContainer = get_node("/root/ViewportContainer")
 onready var graphics = $Graphics
 onready var light : Light2D = $Graphics/Light2D
-<<<<<<< Updated upstream
-onready var _animation_player = $Graphics/AnimationPlayer
-=======
 onready var sprite : AnimatedSprite = $Graphics/Sprite
 onready var sceneManager = get_node("/root/ViewportContainer/Viewport/SceneManager")
 onready var level = get_node(Util.levelPath)
@@ -40,7 +32,6 @@ func set_animation(newAnimation):
 	if animation != newAnimation:
 		animation = newAnimation
 		sprite.play(animation)
->>>>>>> Stashed changes
 
 func get_input() -> void:
 	# Detect up/down/left/right keystate and only move when pressed
@@ -79,13 +70,9 @@ func _process(delta):
 		light.energy = default_light_energy
 	
 	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
-		_animation_player.play("walk")
+		set_animation("walk")
 	else:
-<<<<<<< Updated upstream
-		_animation_player.stop()
-=======
 		set_animation("idle")
 	
 	if sprite.frame % 2 == 1:
 		level.soundManager.play_footsteps("footsteps", sceneManager.sceneNum, 0)
->>>>>>> Stashed changes

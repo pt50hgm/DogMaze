@@ -6,10 +6,7 @@ export var wanderToChaseDistance : int = 1.5 * 128*3
 export var chaseToWanderDelay : float = 10.0
 export var wanderToWanderDelay : float = 10.0
 
-onready var level = get_node(Util.levelPath)
-
 var startPos : Vector2
-var rng = RandomNumberGenerator.new()
 
 func _ready():
 	set_state("wander")

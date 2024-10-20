@@ -8,23 +8,18 @@ export var moveSpeed : float
 onready var player = get_node(Util.levelPath + "/Player")
 onready var graphics = get_node(Util.levelPath + "/Player/Graphics")
 onready var light = get_node(Util.levelPath + "/Player/Graphics/Light2D")
-<<<<<<< Updated upstream
-=======
 onready var sprite = $Sprite
 onready var maze = get_node(Util.levelPath + "/Navigation2D/Maze")
 onready var level = get_node(Util.levelPath)
 onready var sceneManager = get_node("/root/ViewportContainer/Viewport/SceneManager")
 
->>>>>>> Stashed changes
 
 var targetLocation : Vector2 = Vector2.ZERO
 var followPosition : Vector2
 var changeStateTimer : float = 0
-<<<<<<< Updated upstream
-=======
 var animation = ""
 var rng = RandomNumberGenerator.new()
-var velocity
+var velocity : Vector2
 
 func find_volume(pos, mult, offset):
 	return -pos.distance_to(player.position) / (128 * 3) * mult + offset
@@ -33,7 +28,6 @@ func set_animation(newAnimation):
 	if animation != newAnimation:
 		animation = newAnimation
 		sprite.play(animation)
->>>>>>> Stashed changes
 
 func set_target_location(target : Vector2) -> void:
 	navigationAgent.set_target_location(target)
@@ -60,7 +54,6 @@ func _process(delta):
 	pass	
 
 func move(delta):
-	var velocity
 	var moveDirection = get_dir_to_target()
 	
 	if arrived_at_target():

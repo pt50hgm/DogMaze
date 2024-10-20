@@ -6,8 +6,8 @@ onready var soundManager = get_node("/root/ViewportContainer/SoundManager")
 
 var scenes = [
 	preload("res://Scenes/Game Scenes/Level1.tscn"),
-#	preload("res://Scenes/Game Scenes/Level2.tscn"),
-#	preload("res://Scenes/Game Scenes/Level3.tscn"),
+	preload("res://Scenes/Game Scenes/Level2.tscn"),
+	preload("res://Scenes/Game Scenes/Level3.tscn"),
 ]
 
 var isTransitioning = false
@@ -26,7 +26,7 @@ func _process(delta):
 # case of a reset, or the next one if the player finishes the current one.
 func start_scene(nextScene):
 	self.remove_child(get_child(0))
-	self.add_child(load(nextScene).instance())
+	self.add_child(nextScene.instance())
 	isTransitioning = false
 	soundManager.set_track(sceneNum)
 
