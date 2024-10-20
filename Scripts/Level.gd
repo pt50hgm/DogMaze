@@ -55,7 +55,7 @@ func off_screen_restart():
 func _ready():
 	set_player_to_start()
 	set_maze_exit()
-	mimicSoundTimer = rng.randf_range(60*2, 60*5)
+	mimicSoundTimer = rng.randf_range(15, 60*5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,7 +67,7 @@ func _process(delta):
 	mimicSoundTimer -= delta
 	if mimicSoundTimer <= 0:
 		rng.randomize()
-		mimicSoundTimer = rng.randf_range(30, 60*5)
+		mimicSoundTimer = rng.randf_range(15, 60*3)
 		var randI = rng.randi_range(0, 1)
 		soundManager.play_effect("mimicSound", randI, -15)
 		
