@@ -47,12 +47,6 @@ func start_jump_scare(animation):
 func _ready():
 	set_player_to_start()
 	set_maze_exit()
-<<<<<<< Updated upstream:Level.gd
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-=======
 	mimicSoundTimer = rng.randf_range(60*2, 60*5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -69,4 +63,3 @@ func _process(delta):
 		var randI = rng.randi_range(0, 1)
 		soundManager.play_effect("mimicSound", randI, -15)
 		
->>>>>>> Stashed changes:Scripts/Level.gd
