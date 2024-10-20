@@ -5,19 +5,27 @@ export var guideDistance: int = 2500
 export var followDistance: int = 100
 export var followToGuideDelay: float = 1.0
 export var guideToFollowDelay: float = 3.0
+<<<<<<< Updated upstream
+=======
 export var scaredToFollowDelay: float = 4.0
 export var calledByMimicToFollowDelay: float = 10.0
 export var offScreenLoseDuration: float = 25000000.0
+>>>>>>> Stashed changes
 
 onready var Main = get_parent()
 
 var followTimer : float
+<<<<<<< Updated upstream
+var followPlayer = false
+var velocity : Vector2 = Vector2.ZERO
+=======
 var callTimer = callCooldown
 var offScreenTimer : float = 0.0
 
 var mimicToFollow : Node2D
 var startState = true
 var barkTimer : float = 0.0
+>>>>>>> Stashed changes
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,6 +47,10 @@ func set_state(s):
 	elif s == "followPlayer":
 		moveSpeed = 10000.0
 	elif s == "called":
+<<<<<<< Updated upstream
+		moveSpeed = 10000.0
+
+=======
 		rng.randomize()
 		var randI = rng.randi_range(0, 2)
 		level.soundManager.play_effect("call", randI, 0)
@@ -49,6 +61,7 @@ func set_state(s):
 	elif s == "idle":
 		moveSpeed = 0.0
 	
+>>>>>>> Stashed changes
 func stateFollowPlayer(delta):
 	set_target_location(player.position)
 	
@@ -93,6 +106,9 @@ func _physics_process(delta):
 	if Input.is_action_pressed("call_dog"):
 		set_state("called")
 	move(delta)
+<<<<<<< Updated upstream
+
+=======
 	
 	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
 		set_animation("walk")
@@ -109,3 +125,4 @@ func _physics_process(delta):
 			level.off_screen_restart()
 	else:
 		offScreenTimer = 0
+>>>>>>> Stashed changes
