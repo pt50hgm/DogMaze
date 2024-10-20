@@ -4,9 +4,13 @@ export var sceneNum = 0
 
 var scenes = [
 	preload("res://Scenes/Game Scenes/Corridor_Level.tscn"),
+	preload("res://Scenes/Game Scenes/Scene1_Level.tscn"),
 	preload("res://Scenes/Game Scenes/Level1.tscn"),
+	preload("res://Scenes/Game Scenes/Scene2_Level.tscn"),
 	preload("res://Scenes/Game Scenes/Level2.tscn"),
+	preload("res://Scenes/Game Scenes/Scene3_Level.tscn"),
 	preload("res://Scenes/Game Scenes/Level3.tscn"),
+	preload("res://Scenes/Game Scenes/End_Level.tscn"),	
 ]
 
 var isTransitioning = false
