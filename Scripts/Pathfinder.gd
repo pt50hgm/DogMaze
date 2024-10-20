@@ -50,7 +50,6 @@ func _process(delta):
 func move(delta):
 	var velocity
 	var moveDirection = get_dir_to_target()
-	
 	if arrived_at_target():
 		#Set animation to idle
 		velocity = Vector2.ZERO

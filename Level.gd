@@ -29,6 +29,7 @@ func set_maze_exit():
 	var exitYCoord = maze.exitYCoords[randI]
 	exitPos = Vector2(maze.exitXCoord + 0.5, exitYCoord + 0.5) * 128
 	
+	
 	var v1 = Vector2(maze.exitXCoord, exitYCoord)
 	var v2 = Vector2(maze.exitXCoord, exitYCoord+1)
 	tileMap.set_cellv(v1, maze.floorTile)

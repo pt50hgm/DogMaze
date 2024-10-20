@@ -20,15 +20,15 @@ func get_random_nearby_pos(pos, dist):
 		tile = tileMap.get_cellv(cell)
 	return randPos
 
-func get_random_rightward_pos(pos, dist):
+func get_random_rightward_pos(pos, xDist, yDist):
 	if tileMap == null: return pos
 	var tile = -1
 	var randPos : Vector2
 	while tile == -1:
 		rng.randomize()
 		randPos = Vector2(
-			pos.x + rng.randf_range(-dist, dist),
-			pos.y + rng.randf_range(-dist, dist))
+			pos.x + rng.randf_range(0, xDist),
+			pos.y + rng.randf_range(-yDist, yDist))
 		var cell = tileMap.world_to_map(randPos)
 		tile = tileMap.get_cellv(cell)
 	return randPos
