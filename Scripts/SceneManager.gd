@@ -2,6 +2,8 @@ extends Node2D
 
 export var sceneNum = 0
 
+onready var soundManager = get_node("/root/ViewportContainer/SoundManager")
+
 var scenes = [
 	preload("res://Scenes/Game Scenes/Level1.tscn"),
 #	preload("res://Scenes/Game Scenes/Level2.tscn"),
@@ -13,7 +15,7 @@ var isTransitioning = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	start_scene(scenes[sceneNum])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,6 +28,7 @@ func start_scene(nextScene):
 	self.remove_child(get_child(0))
 	self.add_child(load(nextScene).instance())
 	isTransitioning = false
+	soundManager.set_track(sceneNum)
 
 func transition_to_next_scene(nextScene):
 	SceneTransition.transition_black(nextScene)

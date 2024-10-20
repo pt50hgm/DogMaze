@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ghostly humming.mp3-f5ed4bc628078ae398505408052d2c03.mp3str"
+
+[deps]
+
+source_file="res://Sounds/ghostly humming.mp3"
+dest_files=[ "res://.import/ghostly humming.mp3-f5ed4bc628078ae398505408052d2c03.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
