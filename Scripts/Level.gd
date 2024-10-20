@@ -46,6 +46,7 @@ func start_jump_scare(animation):
 		sceneManager.restart_level()
 
 func off_screen_restart():
+	soundManager.play_effect("bark", 0, -15)
 	# Play dog scream audio
 	if not sceneManager.isTransitioning:
 		sceneManager.restart_level()
@@ -66,7 +67,7 @@ func _process(delta):
 	mimicSoundTimer -= delta
 	if mimicSoundTimer <= 0:
 		rng.randomize()
-		mimicSoundTimer = rng.randf_range(60*2, 60*5)
+		mimicSoundTimer = rng.randf_range(30, 60*5)
 		var randI = rng.randi_range(0, 1)
 		soundManager.play_effect("mimicSound", randI, -15)
 		

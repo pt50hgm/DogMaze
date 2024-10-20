@@ -33,7 +33,7 @@ func set_state(s):
 	if s == "scared":
 		var pos = maze.get_random_nearby_pos(position, runAwayDistance)
 		set_target_location(pos)
-		level.soundManager.play_effect("bark", 0, find_volume(position, 1, -10))
+		level.soundManager.play_effect("bark", 0, find_volume(position, 1, -15))
 		moveSpeed = 20000.0
 		return
 	if s == "guidePlayer":
