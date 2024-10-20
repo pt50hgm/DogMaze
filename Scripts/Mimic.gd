@@ -65,7 +65,13 @@ func _physics_process(delta):
 			set_animation(mimicType + "_walk")
 		else:
 			set_animation(mimicType + "_idle")
-		
+			
+		if animation == mimicType + "_walk":
+			if position.distance_squared_to(player.position) < wanderToChaseDistance*wanderToChaseDistance:
+				if abs(sprite.frame - prevFrame) == 2:
+					prevFrame = sprite.frame
+					soundManager.play_footsteps2("footsteps", sceneManager.sceneNum, find_volume(position, 15, 0))
+	
 	if player.turbo:
 		if is_illuminated():
 			stunned = true
@@ -85,7 +91,7 @@ func _physics_process(delta):
 			if dog.state != "scared":
 				dog.set_state("scared")
 	if position.distance_squared_to(player.position) < jumpscareDistance*jumpscareDistance:
-		level.start_jump_scare(Node2D.new())
+		level.start_jump_scare(mimicType.substr(0, 6))
 	
 	
 			

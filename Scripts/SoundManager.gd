@@ -4,11 +4,13 @@ var soundTracks = [
 	preload("res://Sounds/Koto.wav"),
 	preload("res://Sounds/Smoky Bells.wav"),
 	preload("res://Sounds/Clockwork.wav"),
+	preload("res://Sounds/Clockwork.wav")
 ]
 var footsteps = [
 	preload("res://Sounds/footsteps_wooden.wav"),
 	preload("res://Sounds/footsteps_carpet.wav"),
-	preload("res://Sounds/footsteps_concrete.mp3"),
+	preload("res://Sounds/footsteps_concrete.wav"),
+	preload("res://Sounds/footsteps_concrete.wav")
 ]
 var bark = preload("res://Sounds/bark.mp3")
 var calls = [

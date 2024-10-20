@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ghostly humming.mp3-f5ed4bc628078ae398505408052d2c03
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

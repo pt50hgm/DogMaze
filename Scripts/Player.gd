@@ -24,6 +24,7 @@ var animation = ""
 var turbo = false
 var turboTimer = turboCoolDown
 var turboFlashTimer = 0.0
+var prevFrame = 0
 
 func _ready():
 	pass
@@ -52,8 +53,27 @@ func get_input() -> void:
 	elif graphics.rotation > PI:
 		graphics.rotation -= 2*PI 
 
+func check_sprint(delta) -> void:
+	if Input.is_action_just_pressed('sprint'):
+		allowed_to_sprint = true
+
+	if allowed_to_sprint and Input.is_action_pressed('sprint'):
+		if stamina <= 0:
+			allowed_to_sprint = false
+		else:
+			stamina -= delta
+			sprite.speed_scale = sprint_multiplier
+			sprint_multiplier = sprint_speed
+	else:
+		if stamina < max_stamina:
+			stamina += delta * 0.5
+		sprite.speed_scale = 1
+		sprint_multiplier = 1
+
 func _physics_process(delta):
 	get_input()
+	check_sprint(delta)
+	velocity = velocity.normalized() * speed * sprint_multiplier
 	move_and_slide(velocity)
 
 func _input(event):
@@ -82,5 +102,7 @@ func _process(delta):
 	else:
 		set_animation("idle")
 	
-	if sprite.frame % 2 == 1:
-		level.soundManager.play_footsteps("footsteps", sceneManager.sceneNum, 0)
+	if animation == "walk":
+		if abs(sprite.frame - prevFrame) == 2:
+			prevFrame = sprite.frame
+			level.soundManager.play_footsteps("footsteps", sceneManager.sceneNum, 0)

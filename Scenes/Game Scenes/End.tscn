@@ -1,10 +1,9 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://Sprites/Maze/wooden_floor.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Maze/hedge_tileset.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Maze.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Placeholders/Rect.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Scenes/end.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Maze/carpet.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=167]
@@ -320,7 +319,6 @@ outlines = [ PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 ) ]
 0/autotile/navpoly_map = [  ]
 0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
-0/autotile/fallback_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
@@ -344,7 +342,6 @@ outlines = [ PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 ) ]
 1/autotile/navpoly_map = [  ]
 1/autotile/priority_map = [  ]
 1/autotile/z_index_map = [  ]
-1/autotile/fallback_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
@@ -699,8 +696,3 @@ position = Vector2( 256, 256 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 128, 128 )
 format = 1
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 540, 540 )
-scale = Vector2( 0.672656, 0.672656 )
-texture = ExtResource( 5 )

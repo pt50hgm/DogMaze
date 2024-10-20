@@ -20,6 +20,7 @@ var changeStateTimer : float = 0
 var animation = ""
 var rng = RandomNumberGenerator.new()
 var velocity : Vector2
+var prevFrame = 0
 
 func find_volume(pos, mult, offset):
 	return -pos.distance_to(player.position) / (128 * 3) * mult + offset
