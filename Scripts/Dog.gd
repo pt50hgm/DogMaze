@@ -1,20 +1,21 @@
 extends "res://Scripts/Pathfinder.gd"
 
-export var followDuration: float = 10.0
-export var guideDistance: int = 2 * 128*3
-export var callCooldownTimer: float = 5.0
-onready var callCooldown = callCooldownTimer
-export var followDistance: int = 100
+export var callDuration: float = 10.0
+export var guideDistance: int = 1.5 * 128*3
+export var offScreenDistance: int = 2.5 * 128*3
+export var callCooldown: float = 20.0
 export var runAwayDistance: int = 3 * 128 * 3
 export var guideToFollowDelay: float = 3.0
 export var scaredToFollowDelay: float = 4.0
 export var calledByMimicToFollowDelay: float = 10.0
-var startTimer: bool = false
+export var offScreenLoseDuration: float = 25.0
 
 onready var Main = get_parent()
 
+var startTimer: bool = false
 var followTimer : float
-var followPlayer = false
+var callTimer = callCooldown
+var offScreenTimer : float = 0.0
 var velocity : Vector2 = Vector2.ZERO
 
 var mimicToFollow : Node2D
@@ -34,10 +35,10 @@ func set_state(s):
 	state = s
 	changeStateTimer = 0
 	if s == "guidePlayer":
-		print(level.exitPos)
 		set_target_location(level.exitPos)
 		moveSpeed = 15000.0
 	elif s == "followPlayer":
+		set_target_location(position)
 		moveSpeed = 0
 	elif s == "called":
 		moveSpeed = 25000.0
@@ -49,18 +50,14 @@ func stateFollowPlayer(delta):
 		set_state("guidePlayer")
 
 func stateGuidePlayer(delta):
-	if is_illuminated() and position.distance_squared_to(player.position) < guideDistance*guideDistance:
-		changeStateTimer -= delta
-	else:
-		changeStateTimer += delta
-	changeStateTimer = max(changeStateTimer, 0)
-	if changeStateTimer > guideToFollowDelay:
+	if  position.distance_squared_to(player.position) > guideDistance*guideDistance:
 		set_state("followPlayer")
 
 func stateCalled(delta):
 	set_target_location(player.position)
 	
-	if position.distance_squared_to(player.position) < followDistance*followDistance:
+	changeStateTimer += delta
+	if changeStateTimer > callDuration:
 		set_state("guidePlayer")
 
 func stateScared(delta):
@@ -92,15 +89,17 @@ func _physics_process(delta):
 	if startState:
 		set_state("guidePlayer")
 		startState = false
-	if Input.is_action_just_pressed("call_dog") and callCooldown == callCooldownTimer
+	if Input.is_action_just_pressed("call_dog") and callTimer >= callCooldown:
 		set_state("called")
-		startTimer = true
-	print(callCooldown)
-	if startTimer:
-		callCooldown -= delta
-		if callCooldown <= 0:
-			startTimer = false
-			callCooldown = callCooldownTimer
+		callTimer = 0
+	callTimer += delta
 	
 	do_state_action(delta)
 	move(delta)
+	
+	if position.distance_squared_to(player.position) > offScreenDistance*offScreenDistance:
+		offScreenTimer += delta
+		if offScreenTimer > offScreenLoseDuration:
+			level.off_screen_restart()
+	else:
+		offScreenTimer = 0

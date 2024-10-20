@@ -44,6 +44,11 @@ func start_jump_scare(animation):
 	if not sceneManager.isTransitioning:
 		sceneManager.restart_level()
 
+func off_screen_restart():
+	# Play dog scream audio
+	if not sceneManager.isTransitioning:
+		sceneManager.restart_level()
+
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
