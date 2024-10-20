@@ -38,20 +38,30 @@ func set_state(s):
 		set_target_location(level.exitPos)
 		moveSpeed = 15000.0
 	elif s == "followPlayer":
-		set_target_location(position)
-		moveSpeed = 0
+		moveSpeed = 25000.0
 	elif s == "called":
 		moveSpeed = 25000.0
 	elif s == "calledByMimic":
 		moveSpeed = 25000.0
-
+	elif s == "idle":
+		moveSpeed = 0.0
+	
 func stateFollowPlayer(delta):
+	set_target_location(player.position)
+	
 	if position.distance_squared_to(player.position) < guideDistance*guideDistance:
-		set_state("guidePlayer")
+		set_state("idle")
 
 func stateGuidePlayer(delta):
-	if  position.distance_squared_to(player.position) > guideDistance*guideDistance:
+	if position.distance_squared_to(player.position) > guideDistance*guideDistance:
+		set_state("idle")
+
+func stateIdle(delta):
+	var margin = 128.0
+	if position.distance_squared_to(player.position) - margin*margin > guideDistance*guideDistance:
 		set_state("followPlayer")
+	if position.distance_squared_to(player.position) + margin*margin < guideDistance*guideDistance:
+		set_state("guidePlayer")
 
 func stateCalled(delta):
 	set_target_location(player.position)
@@ -83,6 +93,8 @@ func do_state_action(delta):
 		stateScared(delta)
 	elif state == "calledByMimic":
 		stateCalledByMimic(delta)
+	elif state == "idle":
+		stateIdle(delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
