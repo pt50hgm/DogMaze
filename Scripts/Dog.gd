@@ -2,12 +2,15 @@ extends "res://Scripts/Pathfinder.gd"
 
 export var followDuration: float
 export var guideDistance: int = 2500
+export var callCooldownTimer: float = 5.0
+onready var callCooldown = callCooldownTimer
 export var followDistance: int = 100
 export var runAwayDistance: int = 3 * 128 * 3
 export var followToGuideDelay: float = 1.0
 export var guideToFollowDelay: float = 3.0
 export var scaredToFollowDelay: float = 4.0
 export var calledByMimicToFollowDelay: float = 10.0
+var startTimer: bool = false
 
 onready var Main = get_parent()
 
@@ -95,11 +98,18 @@ func do_state_action(delta):
 		stateScared(delta)
 	elif state == "calledByMimic":
 		stateCalledByMimic(delta)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if Input.is_action_just_pressed("call_dog"):
+	if Input.is_action_just_pressed("call_dog") and callCooldown == callCooldownTimer:
 		set_state("called")
+		startTimer = true
+	print(callCooldown)
+	if startTimer:
+		callCooldown -= delta
+		if callCooldown <= 0:
+			startTimer = false
+			callCooldown = callCooldownTimer
+	
 	do_state_action(delta)
 	move(delta)
