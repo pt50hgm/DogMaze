@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bark.mp3-d75401b56da64791d370aa47701ff692.mp3str"
+
+[deps]
+
+source_file="res://Sounds/bark.mp3"
+dest_files=[ "res://.import/bark.mp3-d75401b56da64791d370aa47701ff692.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

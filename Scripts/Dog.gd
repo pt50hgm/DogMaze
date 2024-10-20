@@ -12,35 +12,40 @@ export var offScreenLoseDuration: float = 25.0
 
 onready var Main = get_parent()
 
-var startTimer: bool = false
 var followTimer : float
 var callTimer = callCooldown
 var offScreenTimer : float = 0.0
 
 var mimicToFollow : Node2D
 var startState = true
+var barkTimer : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	set_state("guidePlayer")
 
 func set_state(s):
-	print(state, " ", s)
-	if s == "scared":
-		var pos = maze.get_random_nearby_pos(position, runAwayDistance)
-		set_target_location(pos)
-		moveSpeed = 20000.0
-		state = s
-		return
 	state = s
 	changeStateTimer = 0
+	
+	if s == "scared":
+		print("BARK")
+		var pos = maze.get_random_nearby_pos(position, runAwayDistance)
+		set_target_location(pos)
+		level.soundManager.play_effect("bark", 0, find_volume(position, 1, -10))
+		moveSpeed = 20000.0
+		return
 	if s == "guidePlayer":
-		moveSpeed = 15000.0
+		moveSpeed = 5000.0
 	elif s == "followPlayer":
-		moveSpeed = 25000.0
+		moveSpeed = 10000.0
 	elif s == "called":
+		rng.randomize()
+		var randI = rng.randi_range(0, 2)
+		level.soundManager.play_effect("call", randI, 0)
 		moveSpeed = 25000.0
 	elif s == "calledByMimic":
+		level.soundManager.play_effect("call", 0, 0)
 		moveSpeed = 25000.0
 	elif s == "idle":
 		moveSpeed = 0.0
@@ -96,7 +101,7 @@ func do_state_action(delta):
 		stateCalledByMimic(delta)
 	elif state == "idle":
 		stateIdle(delta)
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if startState:
@@ -114,7 +119,10 @@ func _physics_process(delta):
 		set_animation("walk")
 	else:
 		set_animation("idle")
-		
+	
+	if animation == "walk":
+		if sprite.frame % 2 == 1:
+			soundManager.play_footsteps2("footsteps", sceneManager.sceneNum, find_volume(position, 15, 0))
 	
 	if position.distance_squared_to(player.position) > offScreenDistance*offScreenDistance:
 		offScreenTimer += delta

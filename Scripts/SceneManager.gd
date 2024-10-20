@@ -3,14 +3,9 @@ extends Node2D
 export var sceneNum = 0
 
 var scenes = [
-	preload("res://Scenes/Game Scenes/Corridor_Level.tscn"),
-	preload("res://Scenes/Game Scenes/Scene1_Level.tscn"),
 	preload("res://Scenes/Game Scenes/Level1.tscn"),
-	preload("res://Scenes/Game Scenes/Scene2_Level.tscn"),
 	preload("res://Scenes/Game Scenes/Level2.tscn"),
-	preload("res://Scenes/Game Scenes/Scene3_Level.tscn"),
 	preload("res://Scenes/Game Scenes/Level3.tscn"),
-	preload("res://Scenes/Game Scenes/End_Level.tscn"),	
 ]
 
 var isTransitioning = false
@@ -18,7 +13,7 @@ var isTransitioning = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	start_scene(scenes[sceneNum])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

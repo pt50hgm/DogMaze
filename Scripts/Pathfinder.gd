@@ -11,13 +11,18 @@ onready var light = get_node(Util.levelPath + "/Player/Graphics/Light2D")
 onready var sprite = $Sprite
 onready var maze = get_node(Util.levelPath + "/Navigation2D/Maze")
 onready var level = get_node(Util.levelPath)
+onready var sceneManager = get_node("/root/ViewportContainer/Viewport/SceneManager")
+onready var soundManager = get_node("/root/ViewportContainer/SoundManager")
 
 var targetLocation : Vector2 = Vector2.ZERO
 var followPosition : Vector2
 var changeStateTimer : float = 0
 var animation = ""
 var rng = RandomNumberGenerator.new()
-var velocity
+var velocity : Vector2
+
+func find_volume(pos, mult, offset):
+	return -pos.distance_to(player.position) / (128 * 3) * mult + offset
 
 func set_animation(newAnimation):
 	if animation != newAnimation:
@@ -50,14 +55,15 @@ func _process(delta):
 
 func move(delta):
 	var moveDirection = get_dir_to_target()
+	
 	if arrived_at_target():
 		#Set animation to idle
 		velocity = Vector2.ZERO
 	else:
 		velocity = moveDirection * moveSpeed * delta
 		navigationAgent.set_velocity(velocity)
-	move_and_slide(velocity)
 	look_at(velocity + position)
+	move_and_slide(velocity)
 	
 
 func is_illuminated() -> bool:

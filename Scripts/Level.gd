@@ -12,9 +12,11 @@ onready var player = $Player
 onready var dog = $Navigation2D/Dog
 onready var maze = $Navigation2D/Maze
 onready var tileMap = $Navigation2D/Maze/TileMap
+onready var soundManager = get_node("/root/ViewportContainer/SoundManager")
 
-var exitPos : Vector2
 var rng = RandomNumberGenerator.new()
+var exitPos : Vector2
+var mimicSoundTimer = 0.0
 
 func set_player_to_start():
 	rng.randomize()
@@ -39,8 +41,7 @@ func set_maze_exit():
 
 
 func start_jump_scare(animation):
-	# Instantiate the animation node
-  #	yield() until animation is done
+	soundManager.play_effect("jumpScare", 0, -15)
 	if not sceneManager.isTransitioning:
 		sceneManager.restart_level()
 
@@ -48,13 +49,12 @@ func off_screen_restart():
 	# Play dog scream audio
 	if not sceneManager.isTransitioning:
 		sceneManager.restart_level()
-
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_player_to_start()
 	set_maze_exit()
-	
+	mimicSoundTimer = rng.randf_range(60*2, 60*5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -62,3 +62,11 @@ func _process(delta):
 	if player.position.x > exitX:
 		if not sceneManager.isTransitioning:
 			sceneManager.next_level()
+	
+	mimicSoundTimer -= delta
+	if mimicSoundTimer <= 0:
+		rng.randomize()
+		mimicSoundTimer = rng.randf_range(60*2, 60*5)
+		var randI = rng.randi_range(0, 1)
+		soundManager.play_effect("mimicSound", randI, -15)
+		
