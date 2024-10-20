@@ -29,10 +29,10 @@ func set_state(s):
 	changeStateTimer = 0
 	if s == "wander":
 		set_target_location(maze.get_random_nearby_pos(startPos, wanderDistance))
-		moveSpeed = 10000.0
+		moveSpeed = 8000.0
 	if s == "chase":
 		set_target_location(maze.get_random_nearby_pos(startPos, wanderDistance))
-		moveSpeed = 13000.0
+		moveSpeed = 12000.0
 
 func stateWander(delta):
 	changeStateTimer += delta

@@ -41,14 +41,14 @@ func set_maze_exit():
 
 
 func start_jump_scare(animation):
-	soundManager.play_effect("jumpScare", 0, -15)
 	if not sceneManager.isTransitioning:
+		soundManager.play_effect("jumpScare", 0, -15)
 		sceneManager.restart_level()
 
 func off_screen_restart():
-	soundManager.play_effect("bark", 0, -15)
 	# Play dog scream audio
 	if not sceneManager.isTransitioning:
+		soundManager.play_effect("bark", 0, -15)
 		sceneManager.restart_level()
 	
 # Called when the node enters the scene tree for the first time.
