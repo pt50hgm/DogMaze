@@ -31,19 +31,12 @@ animations = [ {
 [node name="Player" type="KinematicBody2D"]
 z_index = 5
 script = ExtResource( 2 )
-speed = 1600.0
+speed = 600.0
 default_light_energy = 1.0
-turbo_light_energy = 3.0
+turbo_light_energy = 4.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-disabled = true
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
-disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -61,11 +54,9 @@ frame = 2
 visible = false
 position = Vector2( 0, 50 )
 texture = ExtResource( 3 )
-color = Color( 1, 1, 1, 0.588235 )
 mode = 3
 range_z_min = -15
 range_z_max = 15
 shadow_enabled = true
-shadow_color = Color( 1, 0.780392, 0.027451, 0 )
 
 [connection signal="input_event" from="." to="." method="_on_Player_input_event"]

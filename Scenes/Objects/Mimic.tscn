@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Sprites/Mimics/mimicidle.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Mimic.gd" type="Script" id=2]
@@ -16,32 +16,107 @@
 [ext_resource path="res://Sprites/Mimics/mimicright.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Mimics/hollowmimicleft.png" type="Texture" id=15]
 [ext_resource path="res://Sprites/Mimics/personmimicidle.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Mimics/dog_bone.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Player/right_128x128.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Dog/dog_right.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Player/stand_128x128.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Dog/dog_still.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Player/left_128x128.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Dog/dog_left.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Mimics/dog_green_right.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Mimics/dog_green_left.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Mimics/dog_green_idle.png" type="Texture" id=26]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "hollow_mimic",
+"name": "dog_bloody_idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 14 ) ],
 "loop": true,
-"name": "mimic",
+"name": "dog_bloody_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "dog_bone_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "dog_bone_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 26 ) ],
+"loop": true,
+"name": "dog_green_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 26 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "dog_green_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "dog_identical_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "dog_identical_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "dog_part_bone_idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "part_bone",
+"name": "dog_part_bone_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "person_hole_idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 16 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "person_mimic",
+"name": "person_hole_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "person_hollow_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "person_hollow_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "person_seeing_idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "seeing_mimic",
+"name": "person_seeing_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "player_identical_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "player_identical_walk",
 "speed": 5.0
 } ]
 
@@ -52,9 +127,8 @@ position = Vector2( 700, 0 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-rotation = 1.5708
 frames = SubResource( 1 )
-animation = "person_mimic"
+animation = "player_identical_walk"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
@@ -72,5 +146,3 @@ radius = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

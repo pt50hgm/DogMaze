@@ -17,6 +17,7 @@ var followPosition : Vector2
 var changeStateTimer : float = 0
 var animation = ""
 var rng = RandomNumberGenerator.new()
+var velocity
 
 func set_animation(newAnimation):
 	if animation != newAnimation:
@@ -48,7 +49,6 @@ func _process(delta):
 	pass	
 
 func move(delta):
-	var velocity
 	var moveDirection = get_dir_to_target()
 	if arrived_at_target():
 		#Set animation to idle

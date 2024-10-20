@@ -16,10 +16,10 @@ var startTimer: bool = false
 var followTimer : float
 var callTimer = callCooldown
 var offScreenTimer : float = 0.0
-var velocity : Vector2 = Vector2.ZERO
 
 var mimicToFollow : Node2D
 var startState = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -109,6 +109,12 @@ func _physics_process(delta):
 	
 	do_state_action(delta)
 	move(delta)
+	
+	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
+		set_animation("walk")
+	else:
+		set_animation("idle")
+		
 	
 	if position.distance_squared_to(player.position) > offScreenDistance*offScreenDistance:
 		offScreenTimer += delta

@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Game Scenes/Maze3.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Objects/Dog.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Objects/Mimic.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Objects/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level.gd" type="Script" id=5]
 
@@ -16,13 +15,6 @@ script = ExtResource( 5 )
 [node name="Dog" parent="Navigation2D" instance=ExtResource( 2 )]
 position = Vector2( 320, 320 )
 moveSpeed = 3200.0
-followDuration = 20.0
-
-[node name="Mimic Manager" type="YSort" parent="Navigation2D"]
-
-[node name="Mimic" parent="Navigation2D/Mimic Manager" instance=ExtResource( 3 )]
-position = Vector2( 400, -400 )
-jumpscareDistance = 192
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 160, 160 )

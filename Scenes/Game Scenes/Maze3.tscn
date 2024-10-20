@@ -671,6 +671,7 @@ script = ExtResource( 3 )
 exitXCoord = 69
 exitYCoords = [ 10, 22, 25, 43 ]
 floorTile = 5
+mimicTypes = [ "dog_identical", "dog_green", "person_identical" ]
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )

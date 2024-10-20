@@ -3,6 +3,7 @@ extends Node2D
 export var exitXCoord : int
 export var exitYCoords : Array
 export var floorTile : int
+export var mimicTypes : Array
 
 onready var tileMap = $TileMap
 var rng = RandomNumberGenerator.new()

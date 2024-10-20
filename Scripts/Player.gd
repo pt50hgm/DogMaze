@@ -6,9 +6,14 @@ onready var stamina = max_stamina
 var sprint_multiplier : float = 1
 var allowed_to_sprint : bool = true
 export var sprint_speed : float = 2
+export var turboCoolDown = 30.0
+export var turboFlashDuration = 3.0
 
 var velocity : Vector2 = Vector2.ZERO
 var animation = ""
+var turbo = false
+var turboTimer = turboCoolDown
+var turboFlashTimer = 0.0
 
 export var default_light_energy : float
 export var turbo_light_energy : float
@@ -72,10 +77,19 @@ func _input(event):
 		$Graphics.look_at(event.position + position)
 
 func _process(delta):
-	if Input.is_action_pressed("turbo_charge"):
+	turboTimer += delta
+	if Input.is_action_pressed("turbo_charge") and turboTimer > turboCoolDown:
 		light.energy = turbo_light_energy
-	else:
-		light.energy = default_light_energy
+		turbo = true
+		turboTimer = 0
+		turboFlashTimer = 0
+		
+	if turbo:
+		turboFlashTimer += delta
+		if turboFlashTimer > turboFlashDuration:
+			turbo = false
+			light.energy = default_light_energy
+	
 	if abs(velocity.x) > 0 or abs(velocity.y) > 0:
 		set_animation("walk")
 	else:
