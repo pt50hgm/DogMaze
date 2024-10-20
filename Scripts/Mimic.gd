@@ -1,6 +1,6 @@
 extends "res://Scripts/Pathfinder.gd"
 
-export var jumpscareDistance : float = 0.8 * 128
+export var jumpscareDistance : float = 0.7 * 128
 export var wanderDistance : int = 3 * 128*3
 export var wanderToChaseDistance : int = 2 * 128*3
 export var callDogDistance : int = 3 * 128*3
@@ -32,7 +32,7 @@ func set_state(s):
 		moveSpeed = 10000.0
 	if s == "chase":
 		set_target_location(maze.get_random_nearby_pos(startPos, wanderDistance))
-		moveSpeed = 15000.0
+		moveSpeed = 13000.0
 
 func stateWander(delta):
 	changeStateTimer += delta
