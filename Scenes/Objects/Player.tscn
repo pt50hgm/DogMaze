@@ -51,7 +51,6 @@ animation = "walk"
 frame = 2
 
 [node name="Light2D" type="Light2D" parent="Graphics"]
-visible = false
 position = Vector2( 0, 50 )
 texture = ExtResource( 3 )
 mode = 3
