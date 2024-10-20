@@ -35,7 +35,6 @@ func set_state(s):
 	state = s
 	changeStateTimer = 0
 	if s == "guidePlayer":
-		set_target_location(level.exitPos)
 		moveSpeed = 15000.0
 	elif s == "followPlayer":
 		moveSpeed = 25000.0
@@ -49,10 +48,12 @@ func set_state(s):
 func stateFollowPlayer(delta):
 	set_target_location(player.position)
 	
-	if position.distance_squared_to(player.position) < guideDistance*guideDistance:
-		set_state("idle")
+	if position.distance_squared_to(player.position) + 32*32 < guideDistance*guideDistance:
+		set_state("guidePlayer")
 
 func stateGuidePlayer(delta):
+	set_target_location(level.exitPos)
+	
 	if position.distance_squared_to(player.position) > guideDistance*guideDistance:
 		set_state("idle")
 
