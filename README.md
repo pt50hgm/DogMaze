@@ -1,6 +1,7 @@
 Submission to the GMU Fall Game Jam with @garv1908 and other team members.
 
-Here are a few images from the game:
+Play the game here: https://pt50hgm.itch.io/thetrueguide
+
 
 ![dogmaze1](https://github.com/user-attachments/assets/b788659e-45ce-41b0-9e0c-b0299149794d)
 ![dogmaze2](https://github.com/user-attachments/assets/6b65e005-faf5-4119-be32-caa660983014)
